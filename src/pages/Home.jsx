@@ -2,8 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import moment from 'moment';
-import { CreateData } from '../components';
-import Table from './../components/Table';
+import { CreateData, Table } from '../components';
 import { useSelector, useDispatch } from 'react-redux';
 
 function Home(props) {
@@ -12,21 +11,23 @@ function Home(props) {
 	const category = useSelector((state) => state.category);
 	const dispatch = useDispatch();
 
-	const getData = async (url = '') => {
-		const res = await axios.get(`http://localhost:3000/api/${url}`, {
-			headers: {
-				Authorization: `Bearer ${authToken}`,
-			},
-		});
-		dispatch({
-			type: 'SUCCESS_GET_DATA',
-			payload: res.data.data,
-		});
-		return res.data.data;
-	};
+	// const getData = async (url = '') => {
+	// 	const res = await axios.get(`http://localhost:3000/api/${url}`, {
+	// 		headers: {
+	// 			Authorization: `Bearer ${authToken}`,
+	// 		},
+	// 	});
+	// 	dispatch({
+	// 		type: 'SUCCESS_GET_DATA',
+	// 		payload: res.data.data,
+	// 	});
+	// 	return res.data.data;
+	// };
 
 	useEffect(() => {
-		getData('category?page=1&limit=15');
+		dispatch({
+			type: 'FETCHING_DATA',
+		});
 	}, []);
 
 	const removeData = async (url = '') => {
@@ -39,7 +40,7 @@ function Home(props) {
 		return res.data.data;
 	};
 
-	console.log(category);
+	console.log('category', category);
 	// const {
 	// 	isLoading,
 	// 	error,

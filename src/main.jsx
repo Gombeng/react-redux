@@ -7,14 +7,14 @@ import './index.css';
 import { Provider } from 'react-redux';
 import configureStore from './store/index';
 
-const store = configureStore();
+// const store = configureStore();
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
 		{/* <QueryClientProvider client={queryClient}>
 			<App />
 		</QueryClientProvider> */}
-		<Provider store={store}>
+		<Provider store={configureStore}>
 			<App />
 		</Provider>
 	</React.StrictMode>
